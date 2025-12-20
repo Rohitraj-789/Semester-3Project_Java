@@ -1,0 +1,15 @@
+@WebServlet("/admin")
+public class AdminServlet extends HttpServlet {
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
+
+        String action = req.getParameter("action");
+
+        if (action.equals("addUser")) {
+            // Create or update user
+        } else if (action.equals("approveListing")) {
+            // Approve or reject travel listing
+        }
+    }
+}

@@ -1,0 +1,41 @@
+@WebServlet("/book")
+public class BookingServlet extends HttpServlet {
+
+@Override
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        response.getWriter().println("Booking Servlet is working!");
+
+        String type = request.getParameter("type");
+
+        Booking b = new Booking();
+        b.setBookingType(type);
+        b.setStatus("CONFIRMED");
+
+        if ("flight".equals(type)) {
+            b.setFrom(request.getParameter("from"));
+            b.setTo(request.getParameter("to"));
+            b.setTravelDate(request.getParameter("flightDate"));
+        }
+
+        if ("hotel".equals(type)) {
+            b.setCity(request.getParameter("city"));
+            b.setCheckin(request.getParameter("checkin"));
+            b.setCheckout(request.getParameter("checkout"));
+        }
+
+        if ("car".equals(type)) {
+            b.setCity(request.getParameter("location"));
+            b.setTravelDate(request.getParameter("carDate"));
+        }
+
+        int result = BookingDAO.saveBooking(b);
+
+        if (result > 0) {
+            request.setAttribute("booking", b);
+            request.getRequestDispatcher("receipt.jsp").forward(request, response);
+        } else {
+            response.getWriter().println("Booking Failed");
+        }
+    }
+}

@@ -1,0 +1,15 @@
+@WebServlet("/agent")
+public class TravelAgentServlet extends HttpServlet {
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
+
+        String action = req.getParameter("action");
+
+        if (action.equals("addListing")) {
+            // Insert listing into DB with Pending status
+        } else if (action.equals("viewBookings")) {
+            // Fetch bookings
+        }
+    }
+}

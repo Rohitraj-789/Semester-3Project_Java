@@ -1,0 +1,37 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import model.Booking;
+
+public class BookingDAO {
+
+    public static int saveBooking(Booking b) {
+        int status = 0;
+
+        try {
+            Connection con = DBConnection.getConnection();
+
+            String sql = "INSERT INTO bookings " +
+                         "(booking_type, from_location, to_location, city, travel_date, checkin, checkout, status) " +
+                         "VALUES (?,?,?,?,?,?,?,?)";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, b.getBookingType());
+            ps.setString(2, b.getFrom());
+            ps.setString(3, b.getTo());
+            ps.setString(4, b.getCity());
+            ps.setString(5, b.getTravelDate());
+            ps.setString(6, b.getCheckin());
+            ps.setString(7, b.getCheckout());
+            ps.setString(8, b.getStatus());
+
+            status = ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Booking Form</title>
+
+<style>
+    body { font-family: Arial; padding: 20px; }
+    .section { display: none; margin-top: 10px; }
+    input, select, button { padding: 6px; margin: 4px; }
+</style>
+
+<script>
+function showFields() {
+    let type = document.getElementById("type").value;
+
+    document.getElementById("flight").style.display = "none";
+    document.getElementById("hotel").style.display = "none";
+    document.getElementById("car").style.display = "none";
+
+    if (type === "flight") {
+        document.getElementById("flight").style.display = "block";
+    }
+    if (type === "hotel") {
+        document.getElementById("hotel").style.display = "block";
+    }
+    if (type === "car") {
+        document.getElementById("car").style.display = "block";
+    }
+}
+</script>
+
+</head>
+<body>
+
+<h2>Travel Booking</h2>
+
+<form action="book" method="post">
+
+    <!-- Booking Type -->
+    <select name="type" id="type" required onchange="showFields()">
+        <option value="">Select Booking Type</option>
+        <option value="flight">Flight</option>
+        <option value="hotel">Hotel</option>
+        <option value="car">Car</option>
+    </select>
+
+    <!-- Flight Section -->
+    <div id="flight" class="section">
+        <h4>Flight Details</h4>
+        <input type="text" name="from" placeholder="From" required>
+        <input type="text" name="to" placeholder="To" required>
+        <input type="date" name="flightDate" required>
+    </div>
+
+    <!-- Hotel Section -->
+    <div id="hotel" class="section">
+        <h4>Hotel Details</h4>
+        <input type="text" name="city" placeholder="Hotel City" required>
+        <input type="date" name="checkin" required>
+        <input type="date" name="checkout" required>
+    </div>
+
+    <!-- Car Section -->
+    <div id="car" class="section">
+        <h4>Car Details</h4>
+        <input type="text" name="location" placeholder="Pickup Location" required>
+        <input type="date" name="carDate" required>
+    </div>
+
+    <br>
+    <button type="submit">Confirm Booking</button>
+
+</form>
+
+</body>
+</html>
